@@ -9,6 +9,11 @@ However, the hdmi-cec integration supports talking to an HDMI-CEC device over
 a TCP socket. This add-on launches a HDMI-CEC server which supports the
 Raspberry Pi hardware interface.
 
+## Installation
+
+Please refer to [Installing 3rd Party Addons](https://github.com/home-assistant/hassio-addons-example) and add 
+my [parent repository](https://github.com/barneyman/ha-addons) for this repo 
+
 ## Configuration
 
 After enabling this add-on and configuring it
@@ -16,7 +21,7 @@ to automatically start, one can use the following in HomeAssistant `configuratio
 
 ```yaml
 hdmi_cec:
-  host: 58c14403-pi-cec
+  host: ffa7b53e-pi-cec
 ```
 
 and restart HomeAssistant. You should then be able to control your HDMI-CEC devices
@@ -24,8 +29,10 @@ with the integration commands.
 
 ## Notes
 
-For the curious, `58c14403` is the [SHA-1](https://en.wikipedia.org/wiki/SHA-1) hash
-of the string `https://github.com/samueltardieu/homeassistant-addons` and is computed
+
+
+For the curious, `ffa7b53e` is the [SHA-1](https://en.wikipedia.org/wiki/SHA-1) hash
+of the string `https://github.com/barneyman/ha-addons` and is computed
 from the repository name by HomeAssistant.
 
 The icon is part of [iconscount display icon](https://iconscout.com/icon/display-171) collection.
