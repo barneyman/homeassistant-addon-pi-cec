@@ -45,7 +45,7 @@ strange assertions in the logs, use `raspi-config` to change that value.
 # Using the docker file as a remote
 
 If you want to use just the dockerfile, ie not as an HA add-on, on a remote HDMI, follow this (it's
-RPI specific but adapt as required
+RPI specific but adapt as required)
 
 * Burn a lite version of Buster, using the Raspberry Imager
   * Give it a sensible name, wifi creds & enable SSH
@@ -59,7 +59,7 @@ RPI specific but adapt as required
 * Log out, log in (for the OS to re-eval your new group membership)
 * Clone my fork (specifically for my 'helper' shell scripts)
   * `git clone https://github.com/barneyman/homeassistant-addon-pi-cec.git && cd homeassistant-addon-pi-cec`
-* build the docker image - this will take a 'a cup of tea'
+* build the docker image - this will take the time it takes to make and a drink a cup of tea
   * `sh ./build.sh`
 * disable DRM VC4 V3D driver in `/boot/config.txt` (pycec needs `tvservice` which this driver disables)
   * `sudo nano /boot/config.txt` - find `Enable DRM VC4 V3D driver` and comment out that section
