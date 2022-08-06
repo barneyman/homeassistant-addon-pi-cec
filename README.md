@@ -41,3 +41,39 @@ The icon is part of [iconscount display icon](https://iconscout.com/icon/display
 
 The libraries that pycec uses require there be 128M of memory allocatd to the GPU - if you see any
 strange assertions in the logs, use `raspi-config` to change that value.
+
+# Using the docker file as a remote
+
+If you want to use just the dockerfile, ie not as an HA add-on, on a remote HDMI, follow this (it's
+RPI specific but adapt as required)
+
+* Burn a lite version of Buster, using the Raspberry Imager
+  * Give it a sensible name, wifi creds & enable SSH
+* SSH to it
+* update it
+  * `sudo apt update && sudo apt upgrade && sudo apt install git`
+* install docker
+  * `curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh`
+* add yourself to the docker group
+  * `sudo usermod -aG docker $USER`
+* Log out, log in (for the OS to re-eval your new group membership)
+* Clone my fork (specifically for my 'helper' shell scripts)
+  * `git clone https://github.com/barneyman/homeassistant-addon-pi-cec.git && cd homeassistant-addon-pi-cec`
+* build the docker image - this will take the time it takes to make and a drink a cup of tea
+  * `sh ./build.sh`
+* disable DRM VC4 V3D driver in `/boot/config.txt` (pycec needs `tvservice` which this driver disables)
+  * `sudo nano /boot/config.txt` - find `Enable DRM VC4 V3D driver` and comment out that section
+* while in that file, turn off the 'rpi switches TV input when it reboots' by adding `hdmi_ignore_cec_init=1` 
+* reboot
+* log back in, `cd homeassistant-addon-pi-cec`
+* run the test - you may see a few deprecation warnings but no assertions or strange behaviour
+  * `sh ./runtest.sh` 
+* edit your `configuration.yaml`
+  * add an `hdmi_cec` section with a `host` entry (details in my repo `Readme.md`, the host is your rpi hostname)
+* restart your HA
+* you should now have a bunch of `switch.hdmi_?` entities
+* when you're happy that's worked, kill the `runtest.sh` above execute `run.sh` which will make it persistent across boots
+  * beware! HA will vomit errors when pycec disappears, another reboot of HA won't hurt
+
+
+
