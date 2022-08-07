@@ -1,6 +1,6 @@
 {
   "name": "PI CEC",
-  "version": "0.6",
+  "version": "0.7",
   "slug": "pi_cec",
   "init": false,
   "description": "Raspberry Pi HTTP CEC server",
