@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-ARG PYTHON_VERSION=3.9
+ARG PYTHON_VERSION=3.10
 ARG LIBCEC6_VERSION=6.0.2
 
 FROM $BUILD_FROM AS builder
@@ -20,7 +20,7 @@ RUN apk add --no-cache \
         p8-platform-dev \
         git
 RUN mkdir -p /usr/src
-RUN git clone --depth 1 -b libcec-$LIBCEC6_VERSION https://github.com/Pulse-Eight/libcec /usr/src/libcec
+RUN git clone --depth 1 https://github.com/barneyman/libcec /usr/src/libcec
 RUN mkdir /usr/src/libcec/build
 WORKDIR /usr/src/libcec/build
 RUN cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr \
