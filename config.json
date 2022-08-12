@@ -1,6 +1,6 @@
 {
   "name": "PI CEC",
-  "version": "0.7",
+  "version": "0.8",
   "slug": "pi_cec",
   "init": false,
   "description": "Raspberry Pi HTTP CEC server",
@@ -11,7 +11,7 @@
   "watchdog": "tcp://[HOST]:[PORT:9526]",
   "options": {},
   "schema": {},
-  "homeassistant": "2021.7.0",
+  "homeassistant": "2022.7.0",
   "ports": {
     "9526/tcp": null
   },
@@ -19,6 +19,5 @@
     "9526/tcp": "TCP socket for outside communication (not required)"
   },
   "devices": ["/dev/vchiq"],
-  "image": "rfc1149/{arch}-addon-pi_cec",
   "panel_icon": "mdi:video-input-hdmi"
 }
