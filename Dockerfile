@@ -31,10 +31,10 @@ RUN cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr \
     -GNinja ..
 RUN ninja install
 
-FROM $BUILD_FROM
+FROM $BUILD_FROM as viable
 ARG PYTHON_VERSION
 ARG LIBCEC6_VERSION
-RUN apk add --no-cache raspberrypi python3 p8-platform py3-pip eudev-libs
+RUN apk add --no-cache python3 p8-platform py3-pip eudev-libs
 RUN echo /lib:/usr/local/lib:/usr/lib:/opt/vc/lib > /etc/ld-musl-armhf.path
 RUN echo cec > "/usr/lib/python$PYTHON_VERSION/site-packages/cec.pth"
 COPY --from=builder /usr/lib/python$PYTHON_VERSION/site-packages/cec.py /usr/lib/python$PYTHON_VERSION/site-packages/
@@ -43,4 +43,9 @@ COPY --from=builder /usr/lib/libcec.so.$LIBCEC6_VERSION /usr/lib/
 RUN ln -s libcec.so.$LIBCEC6_VERSION /usr/lib/libcec.so.6
 RUN ln -s libcec.so.6
 RUN pip install pycec -U
+
+FROM viable as devcontainer
+RUN apk add --no-cache git
+
+FROM viable as consumer
 CMD [ "python3", "-m", "pycec", "--quiet" ]

@@ -1,2 +1,2 @@
 #/bin/sh
-docker build --build-arg BUILD_FROM=alpine -t "local/pycec" .
+docker build --target=consumer --build-arg BUILD_FROM=alpine -t "local/pycec" .
