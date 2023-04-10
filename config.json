@@ -1,6 +1,6 @@
 {
   "name": "PI CEC",
-  "version": "0.8",
+  "version": "0.9",
   "slug": "pi_cec",
   "init": false,
   "description": "Raspberry Pi HTTP CEC server",
@@ -13,7 +13,7 @@
   "schema": {},
   "homeassistant": "2022.7.0",
   "ports": {
-    "9526/tcp": null
+    "9526/tcp": 9526
   },
   "ports_description": {
     "9526/tcp": "TCP socket for outside communication (not required)"
