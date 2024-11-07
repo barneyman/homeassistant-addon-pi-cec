@@ -1,11 +1,11 @@
-ARG BUILD_FROM
-ARG PYTHON_VERSION=3.10
+ARG BUILD_FROM=alpine:latest
+ARG PYTHON_VERSION=3.12
 ARG LIBCEC6_VERSION=6.0.2
 
 FROM $BUILD_FROM AS builder
 ARG PYTHON_VERSION
 ARG LIBCEC6_VERSION
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 RUN apk add --no-cache \
         eudev-libs \
         p8-platform \
@@ -42,5 +42,5 @@ COPY --from=builder /usr/lib/python$PYTHON_VERSION/site-packages/_cec.so /usr/li
 COPY --from=builder /usr/lib/libcec.so.$LIBCEC6_VERSION /usr/lib/
 RUN ln -s libcec.so.$LIBCEC6_VERSION /usr/lib/libcec.so.6
 RUN ln -s libcec.so.6
-RUN pip install pycec -U
-CMD [ "python3", "-m", "pycec", "--quiet" ]
+RUN pip install pycec -U --break-system-packages
+CMD [ "python3", "-m", "pycec", "--verbose" ]
